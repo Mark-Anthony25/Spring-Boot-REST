@@ -2,6 +2,7 @@ package com.example.crudapi.controller;
 
 import com.example.crudapi.model.User;
 import com.example.crudapi.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +30,11 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
-
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @Valid @RequestBody User userDetails) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();

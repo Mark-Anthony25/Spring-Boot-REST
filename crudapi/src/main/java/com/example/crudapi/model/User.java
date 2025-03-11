@@ -1,6 +1,8 @@
 package com.example.crudapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
@@ -9,8 +11,14 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
+
     private Long id;
+    @NotBlank(message = "Name is Required")
     private String name;
+    @NotBlank(message = "Email is Required")
+    @Email(message = "Invalid email format")
     private String email;
 
     // Getters and Setters
